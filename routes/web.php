@@ -19,3 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('users','UsersController')->middleware('auth');
+Route::resource('departaments','DepartamentsController')->middleware('auth');

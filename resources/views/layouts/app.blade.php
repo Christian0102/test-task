@@ -34,7 +34,7 @@
                             <a href="{{route('users.index')}}" class="btn btn-outline-primary"> Users </a>
                         </div>
                         <div class="col-md-4">
-                            <a href="{{route('users.index')}}" class="btn btn-outline-dark"> Sections </a>
+                            <a href="{{route('users.index')}}" class="btn btn-outline-dark"> Departments </a>
                         </div>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                             <span class="navbar-toggler-icon"></span>
