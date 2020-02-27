@@ -25,7 +25,7 @@
                                     {{$departament->title}}
                                 </div>
                                 <div class="card-body">
-                                    {{$departament->description}}
+                                    {{$departament->title}}
                                 </div>
                             </div> 
                         </div>   

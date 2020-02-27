@@ -14,15 +14,17 @@ class DepartamentsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-          $departaments = DB::table('users_departaments')
-               ->select('departaments.title', 'departaments.id' ,'departaments.description', 'departaments.logo', 'users.id','users.name')
-               ->leftJoin('departaments',function($join){
-                   $join->on('departaments.id', '=','users_departaments.departament_id');
-               })->leftJoin('users',function($join){
-                   $join->on('users.id', '=','users_departaments.user_id');
-               })->paginate(10);
-        dd($departaments);              
-       return view('departaments.index',['departaments'=>$departaments]);
+        $departaments = \App\Departaments::all();
+        /*foreach ($departaments as $departament) {
+            print_r($departament->title);
+            echo '<pre>';
+            foreach ($departament->users()->paginate(10) as $user => $key) {
+                print_r($key->toArray());
+                echo '<pre>';
+            }
+        }*/
+
+        return view('departaments.index', ['departaments' => $departaments]);
     }
 
     /**
