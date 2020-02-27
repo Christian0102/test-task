@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersToDepartamentsTable extends Migration
+class CreateUsersDepartamentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateUsersToDepartamentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_to__departaments', function (Blueprint $table) {
+        Schema::create('users_departaments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
+            $table->unique(['user_id','departament_id']);
             $table->unsignedBigInteger('departament_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('departament_id')->references('id')->on('departaments');
-            
-            
             $table->timestamps();
         });
     }

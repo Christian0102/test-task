@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class DepartamentsController extends Controller
 {
@@ -13,7 +14,8 @@ class DepartamentsController extends Controller
      */
     public function index()
     {
-        return "Index Method Departaments Controller";
+        $user  = User::find(1);
+        dd($user);
     }
 
     /**

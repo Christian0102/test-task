@@ -45,12 +45,12 @@ class UsersController extends Controller {
             'email.required' => 'Email is required',
             'password.require' => 'Password is required and min lenght 8 characters'
         ]);
-       $validateData['password'] = Crypt::encrypt($request->password);
+       $validateData['password'] = bcrypt($request->password);
 
         $user = User::create($validateData);
         return redirect('/users')
                         ->with('success', 'User Created successfully!');
-    }
+    }с
 
     /**
      * Display the specified resource.
@@ -92,7 +92,7 @@ class UsersController extends Controller {
         ]);
         $userUpdate = ['name' => $request->name,
             'email' => $request->email,
-            'password' =>Crypt::encrypt($request->password)];
+            'password' => bcrypt($request->password)];
         User::where('id', $id)->update($userUpdate);
         return redirect('/users')->with('success', 'User Updated successfully!');
     }

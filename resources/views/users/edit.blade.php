@@ -7,7 +7,7 @@
         @csrf
         <div class="form-group col-md-4">
             <label for="User Name">User Name</label>
-            <input type="text" class="form-control" name="name" id="username"   aria-describedby="username" value="{{$user->name}}" placeholder="User Name" >
+            <input type="text" class="form-control" name="name" id="username"   aria-describedby="username" value="{{$user->name}}" placeholder="User Name" required="">
             @if ($errors->has('name'))
 
             <span class="text-danger">{{ $errors->first('name') }}</span>
@@ -16,7 +16,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="email">Email address</label>
-            <input type="email" class="form-control"  name="email" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$user->email}}" placeholder="Enter email">
+            <input type="email" class="form-control"  name="email" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$user->email}}" placeholder="Enter email" required="">
             @if ($errors->has('name'))
 
             <span class="text-danger">{{ $errors->first('email') }}</span>
@@ -25,7 +25,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="exampleInputPassword1">Password</label>
-            <input type="text" name="password" class="form-control" id="password" value="{{Crypt::decrypt($user->password)}}" placeholder="Password">
+            <input type="text" name="password" class="form-control" id="password" value="" placeholder="Password" required>
             @if ($errors->has('name'))
 
             <span class="text-danger">{{ $errors->first('password') }}</span>

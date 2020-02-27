@@ -9,5 +9,7 @@ class Departaments extends Model
     
     
     
-    
+    public function user() {
+        return $this->belongsToMany(User::class, 'users_departaments');
+    }
 }
