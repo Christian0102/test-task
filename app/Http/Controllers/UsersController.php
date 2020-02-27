@@ -50,7 +50,7 @@ class UsersController extends Controller {
         $user = User::create($validateData);
         return redirect('/users')
                         ->with('success', 'User Created successfully!');
-    }с
+    }
 
     /**
      * Display the specified resource.

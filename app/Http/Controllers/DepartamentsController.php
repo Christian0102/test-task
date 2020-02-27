@@ -4,18 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
-class DepartamentsController extends Controller
-{
+class DepartamentsController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $user  = User::find(1);
-        dd($user);
+    public function index() {
+          $departaments = DB::table('users_departaments')
+               ->select('departaments.title', 'departaments.id' ,'departaments.description', 'departaments.logo', 'users.id','users.name')
+               ->leftJoin('departaments',function($join){
+                   $join->on('departaments.id', '=','users_departaments.departament_id');
+               })->leftJoin('users',function($join){
+                   $join->on('users.id', '=','users_departaments.user_id');
+               })->paginate(10);
+        dd($departaments);              
+       return view('departaments.index',['departaments'=>$departaments]);
     }
 
     /**
@@ -23,8 +30,7 @@ class DepartamentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -34,8 +40,7 @@ class DepartamentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -45,8 +50,7 @@ class DepartamentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -56,8 +60,7 @@ class DepartamentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -68,8 +71,7 @@ class DepartamentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -79,8 +81,8 @@ class DepartamentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
 }
