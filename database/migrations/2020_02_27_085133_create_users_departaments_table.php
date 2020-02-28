@@ -20,6 +20,8 @@ class CreateUsersDepartamentsTable extends Migration {
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('departament_id')->references('id')->on('departaments');
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['departament_id']);
         });
     }
 

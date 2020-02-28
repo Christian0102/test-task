@@ -30,7 +30,7 @@ class DepartamentsController extends Controller {
      */
     public function create() {
         $users = User::all();
-        return view('departaments.create',['users'=>$users]);
+        return view('departaments.create', ['users' => $users]);
     }
 
     /**
@@ -40,30 +40,37 @@ class DepartamentsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        /*$request->validate([
-            'title'=>'required|unique:departaments|min:4',
-            'description'=>'required|min:10',
-            'file'=>'mimes:jpeg,jpg,png,gif|required|max:250',
-            'checkbox' =>'accepted'
-        ]);*/
+         $request->validate([
+          'title'=>'required|unique:departaments|min:4',
+          'description'=>'required|min:10',
+          'file'=>'mimes:jpeg,jpg,png,gif|required|max:250',
+          'checkbox' =>'accepted'
+          ]); 
         $image = $request->file('file');
         $extension = $image->clientExtension();
-        Storage::disk('images')->put($image->getFilename().'.'.$extension,  File::get($image));
+        Storage::disk('images')->put($image->getFilename() . '.' . $extension, File::get($image));
         $departament = new Departaments();
         $departament->title = $request->title;
         $departament->description = $request->description;
-        $departament->logo = $image->getFilename().'.'.$extension;
+        $departament->logo = $image->getFilename() . '.' . $extension;
         $departament->save();
-        $userDepartaments = DB::table('users_departaments');
-        dd($request->all());
-        
-        
-        
-        
-        
-         return redirect()->route('departaments.index')
-        ->with('success','Departament added successfully...');
-        
+        $usersIds = $request->all()['user_id'];
+        $insertRecords = [];
+        foreach ($usersIds as $userId) {
+            $insertRecords[] = [
+                'user_id' => $userId,
+                'departament_id' => $departament->id,
+            ];
+        }
+        $userDepartaments = DB::table('users_departaments')
+                ->insert($insertRecords);
+
+
+
+
+
+        return redirect()->route('departaments.index')
+                        ->with('success', 'Departament added successfully...');
     }
 
     /**
@@ -104,7 +111,9 @@ class DepartamentsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        //
+        Departaments::where('id', $id)->delete();
+        return redirect('/users')
+                ->with('success', 'Departaments Deleted Successfully');
     }
 
 }

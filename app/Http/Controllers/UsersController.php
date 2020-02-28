@@ -36,16 +36,8 @@ class UsersController extends Controller {
      */
     public function store(Request $request) {
 
-        $validateData = $request->validate([
-            'name' => 'required|min:4',
-            'email' => 'required|email',
-            'password' => 'required|min:8'
-                ], [
-            'name.required' => 'Name is required',
-            'email.required' => 'Email is required',
-            'password.require' => 'Password is required and min lenght 8 characters'
-        ]);
-       $validateData['password'] = bcrypt($request->password);
+        $validateData = $request->validate($this->validationRules());
+        $validateData['password'] = bcrypt($request->password);
 
         $user = User::create($validateData);
         return redirect('/users')
@@ -59,7 +51,7 @@ class UsersController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+       return view('users.index');
     }
 
     /**
@@ -81,15 +73,7 @@ class UsersController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $request->validate([
-            'name' => 'required|min:4',
-            'email' => 'required|email',
-            'password' => 'required|min:8'
-                ], [
-            'name.required' => 'Name is required',
-            'email.required' => 'Email is required',
-            'password.require' => 'Password is required and min lenght 8 characters'
-        ]);
+        $request->validate($this->validationRules());
         $userUpdate = ['name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password)];
@@ -106,7 +90,19 @@ class UsersController extends Controller {
     public function destroy($id) {
         User::where('id', $id)->delete();
         return redirect('/users')
-                ->with('success', 'User Deleted Successfully');
+                        ->with('success', 'User Deleted Successfully');
+    }
+
+    private function validationRules() {
+        return [
+        'name' => 'required|min:4',
+        'email' => 'required|email',
+        'password' => 'required|min:8'
+        ], [
+        'name.required' => 'Name is required',
+        'email.required' => 'Email is required',
+        'password.require' => 'Password is required and min lenght 8 characters'
+        ]);
     }
 
 }
