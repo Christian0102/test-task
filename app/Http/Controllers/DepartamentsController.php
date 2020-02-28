@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
+use App\Departaments;
+use App\User;
 
 class DepartamentsController extends Controller {
 
@@ -37,7 +40,30 @@ class DepartamentsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        dd($request->all()['logo']);
+        /*$request->validate([
+            'title'=>'required|unique:departaments|min:4',
+            'description'=>'required|min:10',
+            'file'=>'mimes:jpeg,jpg,png,gif|required|max:250',
+            'checkbox' =>'accepted'
+        ]);*/
+        $image = $request->file('file');
+        $extension = $image->clientExtension();
+        Storage::disk('images')->put($image->getFilename().'.'.$extension,  File::get($image));
+        $departament = new Departaments();
+        $departament->title = $request->title;
+        $departament->description = $request->description;
+        $departament->logo = $image->getFilename().'.'.$extension;
+        $departament->save();
+        $userDepartaments = DB::table('users_departaments');
+        dd($request->all());
+        
+        
+        
+        
+        
+         return redirect()->route('departaments.index')
+        ->with('success','Departament added successfully...');
+        
     }
 
     /**

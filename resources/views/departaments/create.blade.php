@@ -13,14 +13,14 @@
     </div>
     <div class="form-group col-md-6">
         <div class="custom-file">
-            <input type="file" class="custom-file-input" name="logo" id="inputGroupFile04">
+            <input type="file" class="custom-file-input" name="file" id="inputGroupFile04">
             <label class="custom-file-label" for="inputGroupFile04">Choose Logo</label>
         </div>
     </div>
     <div class="form-group col-md-6">
         @foreach($users as $user)
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" name="user_id" value="{{$user->id}}" id="exampleCheck1">
+            <input type="checkbox" class="form-check-input" name="user_id[]" value="{{$user->id}}" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">{{$user->name}}</label>
         </div>
         @endforeach()

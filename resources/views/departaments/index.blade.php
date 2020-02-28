@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="card">
-                                <img src="{{url('images/tux-g.jpg')}}" class="card-img-top" alt="image"> 
+                                <img src="/storage/images/logo/{{$departament->logo}}" class="card-img-top" alt="image"> 
                             </div>
                         </div>
                         <div class="col-md-4">
