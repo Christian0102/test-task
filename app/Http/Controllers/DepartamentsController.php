@@ -26,7 +26,8 @@ class DepartamentsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+        $users = User::all();
+        return view('departaments.create',['users'=>$users]);
     }
 
     /**
@@ -36,7 +37,7 @@ class DepartamentsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+        dd($request->all()['logo']);
     }
 
     /**
