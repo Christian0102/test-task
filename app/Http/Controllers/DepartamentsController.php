@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 class DepartamentsController extends Controller {
 
@@ -15,16 +16,8 @@ class DepartamentsController extends Controller {
      */
     public function index() {
         $departaments = \App\Departaments::all();
-        /*foreach ($departaments as $departament) {
-            print_r($departament->title);
-            echo '<pre>';
-            foreach ($departament->users()->paginate(10) as $user => $key) {
-                print_r($key->toArray());
-                echo '<pre>';
-            }
-        }*/
-
-        return view('departaments.index', ['departaments' => $departaments]);
+        $collection = (new Collection($departaments))->paginate(4);
+        return view('departaments.index', ['departaments' => $collection]);
     }
 
     /**

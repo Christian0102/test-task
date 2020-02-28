@@ -11,7 +11,7 @@
                     </div>   
                     <a href="{{route('departaments.create')}}" class="btn btn-primary float-right" style="">Add New Departaments</a>
                 </div>
-                @foreach($departaments as $departament)
+                @foreach($departaments  as $departament)
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3">
@@ -25,7 +25,6 @@
                                     {{$departament->title}}
                                 </div>
                                 <div class="card-body">
-                                    {{$departament->title}}
                                 </div>
                             </div> 
                         </div>   
@@ -53,6 +52,7 @@
 
                     </div>
                 @endforeach
+                {{$departaments->links()}}
                 </div>
 
             </div>
