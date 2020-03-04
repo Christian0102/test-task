@@ -5,20 +5,20 @@ Foobar is a Python library for dealing with word pluralization.
 ## Installation
 
 git clone https://github.com/Christian0102/test-task.git
-composer update
-composer dump-autoload
+composer update</br>
+composer dump-autoload</br>
 
 configure .env file
  
-Make migration:
+Make migration:</br>
 php artisan migrate
 
-Make symlink() for storage/app/logo folder
+Make symlink() for storage/app/logo folder</br>
 
 php artisan storage:images
 
-php artisan db:seed --class=UsersTableSeeder
-php artisan db:seed --class=DepartamentsSeeder
+php artisan db:seed --class=UsersTableSeeder </br>
+php artisan db:seed --class=DepartamentsSeeder </br>
 
 
 ## Usage
