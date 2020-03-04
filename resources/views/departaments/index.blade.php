@@ -34,12 +34,15 @@
                                     Users
                                 </div> 
                                 <div class="card-body">
-
+                                  @foreach($departament->users as $user)
+                                  {{$user->id}}.{{$user->name}}
+                                  </br>
+                                  @endforeach
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-1">
-                            <a role="button" class="btn btn-secondary" href="">Edit</a>
+                            <a role="button" class="btn btn-secondary" href="{{route('departaments.edit',$departament->id)}}">Edit</a>
                         </div>
                             <form method="POST" action="/departaments/{{$departament->id}}">
                                 {{ csrf_field() }}
