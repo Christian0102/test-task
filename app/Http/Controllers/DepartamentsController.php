@@ -72,7 +72,7 @@ class DepartamentsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        factory();
+        
     }
 
     /**
@@ -97,7 +97,7 @@ class DepartamentsController extends Controller {
      */
     public function update(Request $request, $id) {
         
-        $request->validate($this->validationRules()); 
+        //$request->validate($this->validationRules()); 
         $logo = DB::table('departaments')
                         ->where('id', $id)->value('logo');
         $image = $request->file('file');
