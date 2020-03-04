@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Departaments;
 use App\User;
 
+
 class DepartamentsController extends Controller {
 
     /**
@@ -65,10 +66,6 @@ class DepartamentsController extends Controller {
         $userDepartaments = DB::table('users_departaments')
                 ->insert($insertRecords);
 
-
-
-
-
         return redirect()->route('departaments.index')
                         ->with('success', 'Departament added successfully...');
     }
@@ -89,8 +86,7 @@ class DepartamentsController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
-        //
+    public function edit() {
     }
 
     /**
