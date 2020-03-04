@@ -6,11 +6,11 @@
             @csrf
             <div class="form-group col-md-6">
                 <label for="title">Title:</label>
-                <input type="text" class="form-control" placeholder="Enter Title" name="title" id="title-departaments" value="{{$departament->title}}">
+                <input type="text" class="form-control" placeholder="Enter Title" name="title" id="title-departaments" value="{{$departament->title}}" required>
             </div>
             <div class="form-group col-md-6">
                 <label for="pwd">Description:</label>
-                <textarea class="form-control" name="description" placeholder="Enter Description" id="pwd">{{$departament->description}}</textarea>
+                <textarea class="form-control" name="description" placeholder="Enter Description" id="pwd" required>{{$departament->description}}</textarea>
             </div>
             <div class="form-group col-md-6">
                 <div class="custom-file">
