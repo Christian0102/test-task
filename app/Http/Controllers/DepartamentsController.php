@@ -97,7 +97,7 @@ class DepartamentsController extends Controller {
      */
     public function update(Request $request, $id) {
         
-        //$request->validate($this->validationRules()); 
+        $request->validate($this->validationRules()); 
         $logo = DB::table('departaments')
                         ->where('id', $id)->value('logo');
         $image = $request->file('file');
@@ -105,17 +105,17 @@ class DepartamentsController extends Controller {
         $storage = Storage::disk('images');
         $storage->put($image->getFilename() . '.' . $extension, File::get($image));
         $storage->delete($logo);
-        $departament = new Departaments();
-        $departament->title = $request->title;
-        $departament->description = $request->description;
-        $departament->logo = $image->getFilename() . '.' . $extension;
-        $departament->save();
+        $departament = Departaments::find($id)->update([
+            'title'=>$request->title,
+            'description'=>$request->description,
+            'logo'=>$image->getFilename() . '.' . $extension
+        ]);
         $usersIds = $request->all()['user_id'];
         $insertRecords = [];
         foreach ($usersIds as $userId) {
             $insertRecords[] = [
                 'user_id' => $userId,
-                'departament_id' => $departament->id,
+                'departament_id' => $id,
             ];
         }
         $userDepartaments = DB::table('users_departaments')
@@ -139,7 +139,7 @@ class DepartamentsController extends Controller {
     private function validationRules() {
        return  [
           'title'=>'required|min:4|unique:departaments',
-          'description'=>'required|min:10',
+          'description'=>'required|min:5',
           'file'=>'required|mimes:jpg,png,jpeg|max:250',
            'user_id.*'=>'required'
              ];
