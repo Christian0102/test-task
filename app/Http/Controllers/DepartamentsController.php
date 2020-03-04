@@ -40,12 +40,8 @@ class DepartamentsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-         $request->validate([
-          'title'=>'required|unique:departaments|min:4',
-          'description'=>'required|min:10',
-          'file'=>'mimes:jpeg,jpg,png,gif|required|max:250',
-          'checkbox' =>'accepted'
-          ]); 
+        
+        $request->validate($this->validationRules()); 
         $image = $request->file('file');
         $extension = $image->clientExtension();
         Storage::disk('images')->put($image->getFilename() . '.' . $extension, File::get($image));
@@ -101,6 +97,7 @@ class DepartamentsController extends Controller {
      */
     public function update(Request $request, $id) {
         
+        $request->validate($this->validationRules()); 
         $logo = DB::table('departaments')
                         ->where('id', $id)->value('logo');
         $image = $request->file('file');
@@ -123,7 +120,6 @@ class DepartamentsController extends Controller {
         }
         $userDepartaments = DB::table('users_departaments')
                 ->insert($insertRecords);
-
         return redirect()->route('departaments.index')
                         ->with('success', 'Departament added successfully...');
     }
@@ -138,6 +134,15 @@ class DepartamentsController extends Controller {
         Departaments::where('id', $id)->delete();
         return redirect('/departaments')
                         ->with('success', 'Departaments Deleted Successfully');
+    }
+    
+    private function validationRules() {
+       return  [
+          'title'=>'required|min:4|unique:departaments',
+          'description'=>'required|min:10',
+          'file'=>'required|mimes:jpg,png,jpeg|max:250',
+           'user_id.*'=>'required'
+             ];
     }
 
 }
