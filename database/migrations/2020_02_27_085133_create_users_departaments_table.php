@@ -12,6 +12,7 @@ class CreateUsersDepartamentsTable extends Migration {
      * @return void
      */
     public function up() {
+        $this->down();
         Schema::create('users_departaments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');

@@ -72,7 +72,7 @@ class DepartamentsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        factory();
     }
 
     /**

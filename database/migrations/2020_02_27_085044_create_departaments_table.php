@@ -13,6 +13,7 @@ class CreateDepartamentsTable extends Migration
      */
     public function up()
     {
+        $this->down();
         Schema::create('departaments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
