@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-md-3 img-card">
                             <div class="card">
-                                <img src="/storage/images/logo/{{$departament->logo}}" class="card-img-top" alt="image"> 
+                                <img src="<?php echo asset('storage/').'/'.$departament->logo?>" class="card-img-top" alt="image"> 
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -45,7 +45,7 @@
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-danger delete-user" value="Delete user">
+                                    <input type="submit" class="btn btn-danger delete-user" value="Delete">
                                 </div>
                             </form>
                         </div>

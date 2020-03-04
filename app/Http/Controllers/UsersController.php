@@ -97,12 +97,11 @@ class UsersController extends Controller {
         return [
         'name' => 'required|min:4',
         'email' => 'required|email',
-        'password' => 'required|min:8'
-        ], [
+        'password' => 'required|min:8',
         'name.required' => 'Name is required',
         'email.required' => 'Email is required',
         'password.require' => 'Password is required and min lenght 8 characters'
-        ]);
+        ];
     }
 
 }

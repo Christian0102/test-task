@@ -20,3 +20,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('users','UsersController')->middleware('auth');
 Route::resource('departaments','DepartamentsController')->middleware('auth');
+Route::get('/root',function(){
+    echo storage_path();
+});
+Route::get('/url',function (){
+ print_r(Storage::disk('local')->exists('phpVQfHO5.jpg'));
+    
+});
+
+Route::get('/images',function(){
+    
+});
