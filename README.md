@@ -1,6 +1,6 @@
 # Laravel Test-Task
  Laravel Test-Task for 4Pixel Company
-Foobar is a Python library for dealing with word pluralization.
+
 
 ## Installation
 
